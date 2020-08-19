@@ -1,6 +1,8 @@
-<h1 align="center">
-  <img src="../givit/static/img/leaveit2givit.jpg" />
-</h1>
+<div align="center">
+
+![](static/img/leaveit2givit.jpg)
+
+</div>
 
 # background & vision
 
@@ -10,9 +12,12 @@ Givit web-application will automate the procces of gathering our friends demands
 
 # app components
 
-<h1 align="center">
-  <img src="../givit/static/img/overview.png" />
-</h1>
+<div align="center">
+
+![](static/img/overview.png)
+
+</div>
+
 ## Backend
 
 implemted with Django the following components:
@@ -50,7 +55,7 @@ implemented with bootstrap the following components:
 - online feed is good ides with server-sdie rendering (or its better clieant side? how to avoid react in first stage?)
 - DB?
 
-# Getting started:
+# Getting started
 
 These instructions will get you a copy of the project up and running on your local machine.
 
@@ -90,7 +95,7 @@ exit
 vagrant destroy -f
 ```
 
-# Dependencies:
+# Dependencies
 
 we are planning to supply a requirement.txt and a bootstrap file that will install all the needed libraries.
 
