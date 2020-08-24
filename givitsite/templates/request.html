@@ -1,0 +1,23 @@
+{%extends 'base.html'%}
+
+{%block content%}
+
+<h1>How can we help?</h1>
+<form action="itemrequest" method="POST">
+
+    {%csrf_token%}
+    what item do you need?: <input type = "text" name = "item" />
+    <br>
+    city to deliver: <input type = "text" name = "city" />
+    <br>
+    special requests : 
+    <br />
+    <textarea rows = "5" cols = "50" name = "specialreq">
+       Enter description here...
+    </textarea>
+    <br>
+    <input type = "submit" name = "submit" value = "Submit" />
+</form>
+
+
+{%endblock%}
