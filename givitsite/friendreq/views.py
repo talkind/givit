@@ -4,15 +4,16 @@ from .models import ItemRequest
 
 # Create your views here.
 
-def request(request):
-    return render(request, 'request.html')
+def requestItem(request):
+    if request.method == 'GET':
+        return render(request, 'request.html')
 
-def itemrequest(request):
-    city_val = request.POST["city"]
-    item_val = request.POST["item"]
-    special_val = request.POST["specialreq"]
-    req = ItemRequest()
-    req.item = item_val
-    req.city = city_val
-    req.special_req = special_val
-    return render(request, 'demandDB.html',{'request':req})
+    else:
+        city_val = request.POST["city"]
+        item_val = request.POST["item"]
+        special_val = request.POST["specialreq"]
+        newReq = ItemRequest(item=item_val,city = city_val,special_req = special_val)
+        newReq.save();
+        print('new item added')
+        return render(request, 'demandDB.html')
+        
