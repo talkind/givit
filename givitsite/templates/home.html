@@ -50,8 +50,8 @@
     <div id="stripe">
         {% if user.is_authenticated %}
         <b>Hi, {{user.first_name}}</b>
-        <button onclick="location.href='friend/request'"type="button">New Request</button>
-        <button onclick="location.href='friend/feed'"type="button">Found Items</button>
+        <button onclick="location.href='friendreq/requestItem'"type="button">New Request</button>
+        <button onclick="location.href='friendreq/requestItem'"type="button">Found Items</button>
         <button onclick="location.href='accounts/logout'"type="button">Logout</button>    
         {% else %}
         <button onclick="location.href='accounts/register'"type="button">Register</button>

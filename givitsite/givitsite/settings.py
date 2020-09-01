@@ -32,7 +32,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'accounts',
+    'accounts.apps.AccountsConfig',
+    'crispy_forms',
     'givitsite',
     'friendreq',
     'django.contrib.admin',
@@ -130,3 +131,5 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR,'static')
 ]
+
+CRISPY_TEMPLATE_PACK="bootstrap4"

@@ -1,69 +1,16 @@
 {%extends 'base.html'%}
 
+{% block title %} Registeration {% endblock %}
+{% load crispy_forms_tags %}
+
 {%block content%}
+    <h1>Registration</h1>
+    <form action="register" method="post" class="form-group">
+        {% csrf_token %}
+        {{form|crispy}}
 
-    <head>
-        <title>Registeration</title>
-    </head>
-    <body>
-        <form action="register" method="post">
-            {% csrf_token %}
+        <input type="submit" value = "Submit" class="btn btn-success">
 
-            <label for="fname">First name:</label><br>    
-            <input type="text" name="first_name" placeholder="Israel"><br>
-            <label for="fname">Last name:</label><br>
-            <input type="text" name="last_name" placeholder="Israeli"><br>
-            <label for="fname">Username:</label><br>
-            <input type="text" name="username" placeholder="isra"><br>
-            <label for="fname">Password:</label><br>
-            <input type="password" name="password1" placeholder="Aa123456"><br>
-            <label for="fname">Confirm Password:</label><br>
-            <input type="password" name="password2" placeholder="Aa123456"><br>
-            <label for="fname">Email:</label><br>
-            <input type="email" name="email" placeholder="example@gmail.com"><br>
-            <label for="fname">Phone Number:</label><br>
-            <input type="number" name="phone_number" placeholder="0545454545"><br>
-            <label for="fname">Date Of Birth:</label><br>
-            <input type="date" name="date_of_birth" placeholder="01/01/2000"><br>
-            <label for="fname">Address:</label><br>
-            <input type="text" name="address_street" placeholder="Street">
-            <input type="number" name="address_home_number" placeholder="Home No.">
-            <input type="text" name="address_city" placeholder="City"><br>
-            <label for="fname">Field Of Study:</label><br>
-            <input type="text" name="field_of_study" placeholder="Computer Science"><br>
-            <label for="degree">Degree:</label><br>
-            <select id="degree" name="degree">
-            <option value="BA/BSC">BA/BSC</option>
-            <option value="MA/MSC">MA/MSC</option>
-            <option value="PHD">PHD</option>
-            </select><br>
-            <label for="current_year">Current Year:</label><br>
-            <select id="current_year" name="current_year">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            </select><br>
-            <label for="fname">Scholarship:</label><br>
-            <input type="text" name="scholarship" placeholder="FIDF"><br>
-            <label for="fname">Type Of Membership:</label><br>
-            <select id="type_of_friendship" name="type_of_friendship">
-            <option value="friend">friend</option>
-            <option value="coordinator">coordinator</option>
-            </select><br><br>
-            <input type="submit" value = "Submit">
-
-        </form>
-        <div>
-            {%for message in messages%}
-            <h3>{{message}}</h3> 
-            {% endfor %}
-        </div>
-    </body>
 {%endblock%}
-</html>
 
 
