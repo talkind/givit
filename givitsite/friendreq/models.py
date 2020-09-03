@@ -11,12 +11,12 @@ REGION_CHOICES = [
 ]
 
 ITEM_CHOICES = [
-    ('ארון','closet'),
-    ('מיטה','bed'),
-    ('כיסא', 'chair'),
-    ('מקרר','fridge'),
-    ('מכונת כביסה','Washing machine'),
-    ('ספה','sofa'),
+    ('20009','closet'),
+    ('20016','bed'),
+    ('20008', 'chair'),
+    ('10006','fridge'),
+    ('10029','Washing machine'),
+    ('20017','sofa'),
     
 
 ]
@@ -25,14 +25,17 @@ STATUS_CHOICES = [
     ('closed','closed'),
 ]
 
+
+
 class ItemRequest(models.Model):
     #friennd ID inherite from user table
     friend_id = models.IntegerField(default = 305355356)
-    item = models.CharField(max_length = 40,choices = ITEM_CHOICES, default='ארון')
+    item = models.CharField(max_length = 40,choices = ITEM_CHOICES, default='20009')
     region = models.CharField(max_length = 40,choices = REGION_CHOICES, default='Tel Aviv')
     special_req= models.TextField()
     status = models.CharField(max_length = 40,default = 'open', choices = STATUS_CHOICES)
     
+
     
 class ItemsFound(models.Model):
     request_id = models.IntegerField()
@@ -40,3 +43,4 @@ class ItemsFound(models.Model):
     picture = models.URLField()
     city = models.CharField(max_length=50)
     title = models.CharField(max_length=50)
+    match = models.BooleanField(default=False)
