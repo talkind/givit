@@ -22,8 +22,12 @@ def itemRequest_create_view(request):
         return render(request, 'itemRequestform.html',context)
 
 def requestItem(request):
+    # on match
+    if request.method == 'POST':
+        id = request.POST["id"]
+        matchItem = ItemsFound.objects.filter(pk=id).update(match=True)
 
-    if request.method == 'GET':
-        founditems = ItemsFound.objects.all()
-        allrequests = ItemRequest.objects.all()
-        return render (request, 'feed.html', {'founds':founditems, 'allRequests':allrequests})
+    founditems = ItemsFound.objects.all()
+    allrequests = ItemRequest.objects.all()
+    return render (request, 'feed.html', {'founds':founditems, 'allRequests':allrequests})
+
