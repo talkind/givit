@@ -10,7 +10,9 @@ def itemRequest_create_view(request):
     form = itemRequestForm(request.POST or None)
     if request.method == 'POST':
         if form.is_valid():
-            form.save()
+            fs =form.save(commit=False)
+            fs.friend_id = request.user
+            fs.save()
         context = {
             'form' :form
         }
@@ -20,6 +22,7 @@ def itemRequest_create_view(request):
         'form' :form
         }    
         return render(request, 'itemRequestform.html',context)
+
 
 def requestItem(request):
     # on match
