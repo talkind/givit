@@ -7,6 +7,7 @@ from django.db.utils import IntegrityError
 class Migration(migrations.Migration):
 
     dependencies = [
+        ('friendreq','0004_auto_20200903_1728'),
     ]
 
     def generate_superuser(apps, schema_editor):

@@ -1,5 +1,6 @@
 from django.db import models
-
+from django.contrib.auth.models import User
+from django.conf import settings
 # Create your models here.
 REGION_CHOICES = [
     ('Tel Aviv','Tel Aviv'),
@@ -29,7 +30,8 @@ STATUS_CHOICES = [
 
 class ItemRequest(models.Model):
     #friennd ID inherite from user table
-    friend_id = models.IntegerField(default = 305355356)
+    User= settings.AUTH_USER_MODEL
+    friend_id = models.ForeignKey(User, on_delete=models.CASCADE)
     item = models.CharField(max_length = 40,choices = ITEM_CHOICES, default='20009')
     region = models.CharField(max_length = 40,choices = REGION_CHOICES, default='Tel Aviv')
     special_req= models.TextField()
