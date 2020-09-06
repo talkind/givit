@@ -5,19 +5,21 @@ from django.contrib.auth.forms import UserCreationForm
 
 class RegistrationForm(UserCreationForm):
     email = forms.EmailField(required=True)
-    phone_number = forms.IntegerField()
-    date_of_birth = forms.CharField(max_length=100)
-    home_address = forms.CharField(max_length=100)
-    field_of_study = forms.CharField(max_length=100)
-    degree = forms.CharField(max_length=100)
-    scholarship = forms.CharField(max_length=100)
-    membership_type = forms.CharField(max_length=100)
+    student_id = forms.IntegerField()
+    phone_number = forms.IntegerField(required=True)
+    date_of_birth = forms.CharField(required=True, max_length=100)
+    home_address = forms.CharField(required=True, max_length=100)
+    field_of_study = forms.CharField(required=True, max_length=100)
+    degree = forms.CharField(required=True, max_length=100)
+    scholarship = forms.CharField(required=True, max_length=100)
+    membership_type = forms.CharField(required=True, max_length=100)
 
     class Meta:
         model = User
         fields = (
             "first_name",
             "last_name",
+            "student_id",
             "username",
             'password1',
             'password2',
