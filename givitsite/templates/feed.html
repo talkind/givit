@@ -2,9 +2,6 @@
 
 {%block content%}
 <h1>{{request.user}}'s Feed</h1>
-{% if allRequests %}
-
-
 {% for req in allRequests%}
 {% if req.friend_id == request.user %}
 <div class= "jumbotron jumbotron-fluid">
@@ -16,6 +13,7 @@
 </ul>
 <br>
  <h4>founds:</h4>
+    <form method="POST" action='feed'>  {% csrf_token %}
      <table class="table table-hover" width='70%'>
         <tr>
             <td>Title</td>
@@ -40,16 +38,12 @@
     {% endif %}
     {%endfor%}
     </table>
+    </form>
     </li>
 </ul>
 </div>
     {% endif %} 
     {%endfor%}
-
-
-{% else %}
-<p>no requests yet</p>
-{% endif %}
 
 
 {%endblock%}
