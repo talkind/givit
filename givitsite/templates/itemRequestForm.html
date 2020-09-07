@@ -1,8 +1,11 @@
 {%extends 'base.html'%}
 
 {%block content%}
+<h2>Add a new request</h2>
 <form method = 'POST'>     {%csrf_token%}
+    <div class="form-group"> 
     {{form.as_p }}
-    <input type="submit" value="send"/>
+    </div>
+    <input type="submit" class="btn btn-primary" value ="send"/>
 </form>
 {%endblock%}
