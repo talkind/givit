@@ -6,6 +6,7 @@
 
 
 {% for req in allRequests%}
+{% if req.friend_id == request.user %}
 <div>
  <p>{{req.get_item_display}}</p>
 <ul>
@@ -39,6 +40,7 @@
     </li>
 </ul>
 </div>
+    {% endif %} 
     {%endfor%}
 
 
