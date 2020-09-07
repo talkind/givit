@@ -1,19 +1,22 @@
 {%extends 'base.html'%}
 
 {%block content%}
-<h1>My Feed</h1>
+<h1>{{request.user}}'s Feed</h1>
 {% if allRequests %}
 
 
 {% for req in allRequests%}
 {% if req.friend_id == request.user %}
-<div>
- <p>{{req.get_item_display}}</p>
-<ul>
-    <li>Region:{{req.region}}</li>
-    <li>Special Requests:{{req.special_req}}</li>
-    <li> Founds:
-     <table border="1" width='70%'>
+<div class= "jumbotron jumbotron-fluid">
+ <h3>{{req.get_item_display}}</h3>
+ <br>
+<ul class="list-group list-group-flush">
+    <li class="list-group-item">Region: {{req.region}}</li>
+    <li class="list-group-item">Special Requests: {{req.special_req}}</li>
+</ul>
+<br>
+ <h4>founds:</h4>
+     <table class="table table-hover" width='70%'>
         <tr>
             <td>Title</td>
             <td>City</td>
