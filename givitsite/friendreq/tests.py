@@ -4,26 +4,23 @@ from django.contrib.auth.models import User
 from .models import ItemRequest,ItemsFound
 from django.conf import settings
 
+
+url_list = ['/friend/request','/friend/feed']
+url_name_list = ['requestItem','itemRequest_create_view']
+
 class FriendPageTests(TestCase):
-    # check the status code when navigate to request page
+
+    # check the status code when navigate to the given url
     def test_request_status_code(self):
-        response = self.client.get('/friend/request')
-        self.assertEquals(response.status_code,200)
+        for url in url_list:
+            response = self.client.get(url)
+            self.assertEquals(response.status_code,200)
 
     # check url name
     def test_request_url_name(self):
-        response = self.client.get(reverse('itemRequest_create_view'))
-        self.assertEquals(response.status_code,200)
-
-    # check the status code when navigate to feed page
-    def test_feed_status_code(self):
-        response = self.client.get('/friend/feed')
-        self.assertEquals(response.status_code,200)
-
-    # check url name
-    def test_feed_url_name(self):
-        response = self.client.get(reverse('requestItem'))
-        self.assertEquals(response.status_code,200)
+        for url_name in url_name_list:
+            response = self.client.get(reverse(url_name))
+            self.assertEquals(response.status_code,200)
 
     # check if the correct template is being rendered
     def test_feed_correct_tamplate(self):
