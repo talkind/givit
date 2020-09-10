@@ -1,8 +1,9 @@
-from django.test import TestCase 
+from django.test import TestCase, RequestFactory
 from django.shortcuts import reverse
 from django.contrib.auth.models import User
 from .models import ItemRequest,ItemsFound
 from django.conf import settings
+
 
 
 url_list = ['/friend/request','/friend/feed']
@@ -29,16 +30,16 @@ class FriendPageTests(TestCase):
         self.assertTemplateUsed(response,'feed.html')
 
 class ItemRequest_test(TestCase):
-    @classmethod
-    def setUp(cls):
-        test_user = User.objects.filter(is_superuser=True)
-        ItemRequest.objects.create(special_req = "this is a Test", friend_id =test_user[0])
+
+  
+    def setUp(self):
+        self.test_user = User.objects.create_user(username='TestUser!', email='testUser@Test.com', password='top_secret_test')
+        ItemRequest.objects.create(special_req = "this is a Test", friend_id =self.test_user)
     
     def test_text(self):
         #check insersion of request to the ItemRequest table
-        test_user = User.objects.filter(is_superuser=True)
-        req =  ItemRequest.objects.get(friend_id =test_user[0])
+        req =  ItemRequest.objects.get(friend_id =self.test_user)
         expected_special_request = req.special_req
         self.assertEquals(expected_special_request,"this is a Test")
 
- 
+    
