@@ -46,7 +46,12 @@ implemented with bootstrap the following components:
 
 - two users groups: friends, coordinates.
 
-## CI/CD- TBD
+## CI/CD- 
+- basic test for friendreq app- set up the machine and run:
+```
+   python3 manage.py test
+```
+
 
 # Getting started
 
