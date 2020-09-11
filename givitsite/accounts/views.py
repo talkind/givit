@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate
+from django.contrib.auth import login as autologin
 from django.contrib.auth.models import auth, User
 from django.contrib import messages
 from .forms import RegistrationForm, PersonInfoForm
@@ -12,10 +13,12 @@ def register(request):
             user = user_form.save()
             profile = profile_form.save(commit=False)
             profile.user = user
-
             profile.save()
+            
+            user_login = authenticate(username=user_form.cleaned_data['username'], password=user_form.cleaned_data['password1'])
+            autologin(request, user_login)
 
-            return redirect('/')
+            return redirect('/')           
     else:        
         user_form = RegistrationForm()
         profile_form = PersonInfoForm()
@@ -33,7 +36,7 @@ def login(request):
             auth.login(request, user)
             return redirect('/')
         else:
-            messages.info(request,'Invalid credentials')
+            messages.info(request,'username OR password is incorrect')
             return redirect('login')
     else:
         return render(request, 'login.html')
