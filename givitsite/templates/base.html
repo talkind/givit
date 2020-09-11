@@ -50,14 +50,23 @@
     <div id="stripe">
         <button onclick="location.href='/'"type="button">Home Page</button>
         {% if user.is_authenticated %}
-        <b>Hi, {{user.first_name}}</b>
+
         {% if Profile.membership_type == 'coordinator' %}
+        <b>Hi, {{user.first_name}}</b>
         <button onclick="location.href='/friend/request'"type="button">New Request</button>
         <button onclick="location.href='/friend/feed'"type="button">Found Items</button>
         <button onclick="location.href='/accounts/logout'"type="button">Logout</button>
-        {% else %} 
-        <button onclick="location.href='/friend/request'"type="button">Match Items</button>
-        <button onclick="location.href='/friend/feed'"type="button">Summery</button>
+        {% else if Profile.membership_type == 'friend'%}
+        <b>Hi, {{user.first_name}}</b> 
+        <button onclick="location.href='/coordinate/create_brief'"type="button">Create Brief</button>
+        <button onclick="location.href='/coordinate/'"type="button">Veiw Matches</button>
+        <button onclick="location.href='/accounts/logout'"type="button">Logout</button>
+        {% else %}
+        <b>Hi, {{user.username}}</b>
+        <button onclick="location.href='/friend/request'"type="button">New Request</button>
+        <button onclick="location.href='/friend/feed'"type="button">Found Items</button>
+        <button onclick="location.href='/coordinate/create_brief'"type="button">Create Brief</button>
+        <button onclick="location.href='/coordinate/'"type="button">Veiw Matches</button>
         <button onclick="location.href='/accounts/logout'"type="button">Logout</button>
         {% endif %}   
         {% else %}
