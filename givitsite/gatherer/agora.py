@@ -17,41 +17,22 @@ def givit_main():
                   '20017': 'ספה', '10029': 'מכונת כביסה', '10006': 'מקרר'}
     region_dict = {'Tel Aviv': 'תל אביב-יפו', 'Jerusalem': 'ירושלים',
                    'Beer Sheva': 'באר שבע', 'Haifa': 'חיפה', 'Modiin': 'מודיעין', 'Hasharon': 'הוד השרון'}
-    items_list = get_items_list()
-    i = 0
+    items_list = ItemRequest.objects.all()
+    found = ItemsFound.objects.all()
     counter = 0
-    for i in range(len(items_list)):
-        iseek = items_list[i][2]
-        my_soup = Agora_Getrequest(iseek)
-        url_list = find_furniture(
-            my_soup, region_dict.get(items_list[i][3]), iseek_dict.get(items_list[i][2]))
-        for item in range(len(url_list)):
-            items_list[i].append(url_list[item])
-        if len(items_list[i]) > 6:
-            print(items_list[i][6])
-            counter += 1
-            print(str(counter) + " new item added")
-            request_id = int(items_list[i][0])
-            url = items_list[i][6]
-            picture = items_list[i][6]
-            city = items_list[i][3]
-            title = iseek_dict_eng.get(items_list[i][2])
-            newFound = ItemsFound(
-                request_id=request_id, url=url, picture=picture, city=city, title=title)
-            newFound.save()
-        url_list = []
-
-
-def get_items_list():
-    """
-    this function open our wishlist and return item_list such that every item in this list is a list with all the
-    information about.
-    Returns:
-    item_list (list of lists): list of all items in our wishlist.
-    """
-    wish_list = ItemRequest.objects.all()
-    items_list = [list(item.values()) for item in wish_list.values()]
-    return items_list
+    for item in items_list:
+        my_soup = Agora_Getrequest(item.item)
+        url_list = find_furniture(my_soup, region_dict.get(
+            item.region), iseek_dict.get(item.item))
+        if len(url_list) > 0:
+            for url in url_list:
+                if not found.filter(url=url).exists():
+                    print(item.item)
+                    counter += 1
+                    print(str(counter) + " new item added")
+                    newFound = ItemsFound(
+                        request_id=item, url=url, picture=url, city=item.region, title=iseek_dict_eng.get(item.item))
+                    newFound.save()
 
 
 def Agora_Getrequest(iseek):
