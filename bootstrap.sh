@@ -17,3 +17,4 @@ sudo -u postgres psql -c "ALTER ROLE postgres WITH PASSWORD 'givit';"
 # run the server in background
 pipenv run python3 manage.py migrate
 nohup pipenv run python3 manage.py runserver 0:8000 &
+nohup pipenv run python3 manage.py process_tasks &
