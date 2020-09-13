@@ -32,9 +32,12 @@ class PersonInfoForm(forms.ModelForm):
         model = Profile
         fields = [
             'student_id',
-            'phone_number', 
+            'phone_number',
+            'gender', 
             'date_of_birth',
-            'home_address',
+            'address_street_name',
+            'address_house_number',
+            'address_city',
             'field_of_study',
             'degree',
             'scholarship',
