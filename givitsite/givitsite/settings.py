@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'givitsite',
     'friendreq',
     'gatherer',
+    'coordinate'
 
 ]
 
