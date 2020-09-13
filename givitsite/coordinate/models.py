@@ -6,8 +6,8 @@ from friendreq.models import REGION_CHOICES, ITEM_CHOICES , ItemRequest
 
 class CoordinatedItems(models.Model):    
     item = models.CharField(max_length = 40,choices = ITEM_CHOICES)
-    request_id = models.IntegerField(default = 100)
-    date = models.DateField(auto_now=False, auto_now_add=False)
+    request_id = models.IntegerField()
+    transfer_date = models.DateField(auto_now=False, auto_now_add=False)
     student_phone_number = models.CharField(max_length = 10)
     pickup_time = models.TimeField(auto_now=False, auto_now_add=False)
     pickup_location = models.CharField(max_length = 40,choices = REGION_CHOICES)
@@ -26,13 +26,13 @@ class CoordinationForm(forms.ModelForm):
     class Meta:
         model = CoordinatedItems
         widgets = {
-            'date' : DateInput(),
+            'transfer_date' : DateInput(),
             'pickup_time': TimeInput(),
             'drop_off_time' : TimeInput()
         }
         fields = [
             'item',
-            'date',
+            'transfer_date',
             'request_id',
             'pickup_location',
             'drop_off_location',   
