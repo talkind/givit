@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate
+from django.contrib.auth import login as autologin
 from django.contrib.auth.models import auth, User
 from django.contrib import messages
 from .forms import RegistrationForm, PersonInfoForm
+from .models import Profile
 
 def register(request):
     if request.method == 'POST':
@@ -12,10 +14,16 @@ def register(request):
             user = user_form.save()
             profile = profile_form.save(commit=False)
             profile.user = user
-
             profile.save()
 
-            return redirect('/')
+            user_login = authenticate(username=user_form.cleaned_data['username'], password=user_form.cleaned_data['password1'])
+            autologin(request, user_login)
+
+            try:
+                user_profile = Profile.objects.get(user=user)
+            except Profile.DoesNotExist:
+                    user_profile=None
+            return render(request, 'home.html', {'user_profile':user_profile})
     else:        
         user_form = RegistrationForm()
         profile_form = PersonInfoForm()
@@ -31,9 +39,13 @@ def login(request):
 
         if user is not None:
             auth.login(request, user)
-            return redirect('/')
+            try:
+                user_profile = Profile.objects.get(user=user)
+            except Profile.DoesNotExist:
+                user_profile=None
+            return render(request, 'home.html', {'user_profile':user_profile})
         else:
-            messages.info(request,'Invalid credentials')
+            messages.info(request,'username OR password is incorrect')
             return redirect('login')
     else:
         return render(request, 'login.html')
