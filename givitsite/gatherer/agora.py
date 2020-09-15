@@ -22,17 +22,19 @@ def givit_main():
     counter = 0
     for item in items_list:
         my_soup = Agora_Getrequest(item.item)
-        url_list = find_furniture(my_soup, region_dict.get(
+        url_list, images = find_furniture(my_soup, region_dict.get(
             item.region), iseek_dict.get(item.item))
         if len(url_list) > 0:
+            i = 0
             for url in url_list:
                 if not found.filter(url=url).exists():
                     print(item.item)
                     counter += 1
                     print(str(counter) + " new item added")
                     newFound = ItemsFound(
-                        request_id=item, url=url, picture=url, city=item.region, title=iseek_dict_eng.get(item.item))
+                        request_id=item, url=url, picture=images[i], city=item.region, title=iseek_dict_eng.get(item.item))
                     newFound.save()
+                i = i+1
 
 
 def Agora_Getrequest(iseek):
@@ -68,22 +70,32 @@ def find_furniture(soup, area, name):
     url_list (list): list of all url that match to what we search.
     """
     url_list = []
+    images = []
     t = soup.findAll('tbody', class_='objectGroup')
     for i in range(len(t)):
         c1 = t[i].find_all('td', class_='area')
         c2 = t[i].find_all('td', class_='newWindow')
+        c4 = t[i].find_all('td', class_='photoIcon')
+
         c5 = t[i].find_all('td', class_='objectName')
         c6 = t[i].find_all('td', class_='objectState')
         item_name = str(c5[0].text)
         check_item_state = (str((c6[0].select('span'))))
         item_state = str(re.match('.*(condition[2,1]).*', check_item_state))
+
         if area in (c1[0].text) and str(re.match(name, item_name)) != 'None' and item_state != 'None':
             c3 = c2[0].find_all('a')
             string1 = str(c3[0])
             string2 = str(re.findall('href="(\S*)"', string1))
             string4 = 'https://www.agora.co.il/' + string2[2:-2]
             url_list.append(string4)
-    return url_list
+            c4_str = str(c4)
+            image_id = str(re.findall('id=(\d*)&', c4_str))
+            image = "https://cdn.agora.co.il/deals_images/2020-09/" + \
+                image_id[2:-2] + "_t.jpg?v=1"
+            images.append(image)
+
+    return url_list, images
 
 
 def find_new_furniture(soup, area, name):
