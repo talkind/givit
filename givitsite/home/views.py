@@ -1,7 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-
-# Create your views here.
+from accounts.models import Profile
+from django.contrib.auth.models import User
+from django.conf import settings
 
 def home(request):
-    return render(request, 'home.html')
+
+    if request.user.is_authenticated:
+        user_profile = Profile.objects.get(user = request.user)
+        return render(request, 'home.html', {'user_profile': user_profile})
+    else:
+        return render(request, 'home.html')

@@ -36,8 +36,8 @@ GENDER = [
 class Profile(models.Model):
 
     phone_regex = RegexValidator(regex=r'^05[0-68-9][0-9]{7}$', message="Phone number must be entered in the format: 05XXXXXXXX.")
-    id_regex = RegexValidator(regex=r'[0-9]{8,9}', message="ID must be 9 digits long.")
-    house_number_regex = RegexValidator(regex=r'[0-9]{1-3}', message="Please enter a valid number from 1 to 999.")
+    id_regex = RegexValidator(regex=r'\d{8,9}', message="ID must be 9 digits long.")
+    house_number_regex = RegexValidator(regex=r'\d{1,3}', message="Please enter a valid number from 1 to 999.")
     
     user = models.OneToOneField(User, on_delete=models.CASCADE, unique=True)
     

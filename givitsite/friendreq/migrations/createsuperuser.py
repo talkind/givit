@@ -8,7 +8,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('friendreq','0004_auto_20200903_1728'),
-        ('accounts', '0001_initial'), 
+        ('accounts', '0002_auto_20200914_2251'),
     ]
 
     def generate_superuser(apps, schema_editor):
