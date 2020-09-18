@@ -42,16 +42,6 @@ class CoordinationForm(forms.ModelForm):
             'drop_off_time'
             ]
 
-def create_new_coordinations(request):
-    form = CoordinationForm(request.POST or None)
-    if request.method == 'POST':
-        if form.is_valid():
-            fs =form.save(commit=False)
-            fs.friend_id = request.user
-            fs.save()
-        context = {
-            'form' :form
-        }
 
 def close_related_request(request):
     ItemRequest.objects.filter(id = request.POST['request_id']).update(status='close')
