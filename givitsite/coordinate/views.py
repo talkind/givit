@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.http import HttpRequest, HttpResponse
 from friendreq.models import ItemsFound, ItemRequest
-from . models import CoordinatedItems, CoordinationForm, create_new_coordinations, close_related_request
+from . models import CoordinatedItems, CoordinationForm, close_related_request
 
 def coordinator_create_view(request):
     if request.method == 'GET':
@@ -17,7 +17,7 @@ def coordinator_create_view(request):
         if form.is_valid():
             fs = form.save(commit=False)
             fs.save()
-            close_related_request(request);
+            close_related_request(request)
         context = {
             'form' :form
         }
