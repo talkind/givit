@@ -6,15 +6,16 @@
         <title>login</title>
     </head>
     <body>
-        <form action="login" method="post">
+        <h1 style="text-align:center">Login</h1>
+        <br>
+        <form action="login" method="post" class="form-group">
             {% csrf_token %}
 
-            <label for="fname">Username:</label><br>
+            <label for="fname">Username:</label>
             <input type="text" name="username" placeholder="isra"><br>
-            <label for="fname">Password:</label><br>
+            <label for="fname">Password:</label>
             <input type="password" name="password" placeholder="Aa123456"><br>
-
-            <input type="submit" value="Submit">
+            <input type="submit" value="Log in" class="btn btn-success">
 
         </form>
         <div>
