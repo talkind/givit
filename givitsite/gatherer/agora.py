@@ -9,6 +9,9 @@ from datetime import datetime
 from friendreq.models import ItemRequest
 from friendreq.models import ITEM_CHOICES
 from friendreq.models import ItemsFound
+import logging
+
+logger = logging.getLogger('django')
 
 
 def givit_main():
@@ -27,9 +30,9 @@ def givit_main():
         if len(url_list) > 0:
             for url in url_list:
                 if not found.filter(url=url).exists():
-                    print(item.item)
                     counter += 1
-                    print(str(counter) + " new item added")
+                    logger.info(iseek_dict_eng.get(item.item) +
+                                ": " + str(counter) + " new item added")
                     newFound = ItemsFound(
                         request_id=item, url=url, picture=url, city=item.region, title=iseek_dict_eng.get(item.item))
                     newFound.save()
