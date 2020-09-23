@@ -7,8 +7,26 @@ pip3 install --upgrade pip
 
 # Installing pipenv, create new env and sync lib with pipfile
 pip3 install pipenv
-cd /vagrant/givitsite/
+
+#navigate to app folder
+if [ "$CI" ] 
+then
+    cd givitsite
+    echo "in github action CI"
+    
+else
+    cd /vagrant/givitsite/
+    echo "in vagrant"
+fi
+
 pipenv sync
+
+# start posgresql when running out of vagrant
+if [ "$CI" ] 
+then
+    echo "start postgresql"
+    sudo systemctl start postgresql
+fi
 
 # DB creation
 sudo -u postgres createdb givit
