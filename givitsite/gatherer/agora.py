@@ -12,14 +12,14 @@ from friendreq.models import ItemsFound
 import logging
 
 logger = logging.getLogger('django')
+iseek_dict = {'20016': 'מיטה', '20008': 'כיסא', '20009': 'ארון',
+              '20017': 'ספה', '10029': 'מכונת כביסה', '10006': 'מקרר'}
+region_dict = {'Tel Aviv': 'תל אביב-יפו', 'Jerusalem': 'ירושלים',
+               'Beer Sheva': 'באר שבע', 'Haifa': 'חיפה', 'Modiin': 'מודיעין', 'Hasharon': 'הוד השרון'}
 
 
 def givit_main():
     iseek_dict_eng = dict(ITEM_CHOICES)
-    iseek_dict = {'20016': 'מיטה', '20008': 'כיסא', '20009': 'ארון',
-                  '20017': 'ספה', '10029': 'מכונת כביסה', '10006': 'מקרר'}
-    region_dict = {'Tel Aviv': 'תל אביב-יפו', 'Jerusalem': 'ירושלים',
-                   'Beer Sheva': 'באר שבע', 'Haifa': 'חיפה', 'Modiin': 'מודיעין', 'Hasharon': 'הוד השרון'}
     items_list = ItemRequest.objects.all()
     found = ItemsFound.objects.all()
     counter = 0
@@ -89,11 +89,11 @@ def find_furniture(soup, area, name):
         if area in (c1[0].text) and str(re.match(name, item_name)) != 'None' and item_state != 'None':
             c3 = c2[0].find_all('a')
             string1 = str(c3[0])
-            string2 = str(re.findall('href="(\S*)"', string1))
+            string2 = str(re.findall(r'href="(\S*)"', string1))
             string4 = 'https://www.agora.co.il/' + string2[2:-2]
             url_list.append(string4)
             c4_str = str(c4)
-            image_id = str(re.findall('id=(\d*)&', c4_str))
+            image_id = str(re.findall(r'id=(\d*)&', c4_str))
             image = "https://cdn.agora.co.il/deals_images/2020-09/" + \
                 image_id[2:-2] + "_t.jpg?v=1"
             images.append(image)
@@ -128,7 +128,7 @@ def find_new_furniture(soup, area, name):
         if area in (c1[0].text) and str(re.match(my_regex, upload_time)) != 'None' and str(re.match(name, item_name)) != 'None' and item_state != 'None':
             c3 = c2[0].find_all('a')
             string1 = str(c3[0])
-            string2 = str(re.findall('href="(\S*)"', string1))
+            string2 = str(re.findall(r'href="(\S*)"', string1))
             string4 = 'https://www.agora.co.il/' + string2[2:-2]
             url_list.append(string4)
     return url_list
