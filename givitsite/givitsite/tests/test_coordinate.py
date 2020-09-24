@@ -1,11 +1,15 @@
 from django.shortcuts import reverse
-from django.test import TestCase
+from django.test import TestCase, Client
 
 URL_LIST = ['/coordinate/']
 URL_NAME_LIST = ['coordinator_create_view']
 
 
 class CoordinatePageTests_views_GET(TestCase):
+
+    def setUp(self):
+        # Every test needs a client.
+        self.client = Client()
 
     # check the status code when navigate to the given url
     def test_request_status_code(self):
