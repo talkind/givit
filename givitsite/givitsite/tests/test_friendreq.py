@@ -1,7 +1,7 @@
 from django.test import TestCase, Client
 from django.shortcuts import reverse
 from django.contrib.auth.models import User
-from .models import ItemRequest , ItemsFound
+from friendreq.models import ItemRequest , ItemsFound
 from django.conf import settings
 import json
 
