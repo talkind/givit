@@ -13,7 +13,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='ItemsFound',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True,
+                                        primary_key=True, serialize=False, verbose_name='ID')),
                 ('request_id', models.IntegerField()),
                 ('url', models.URLField()),
                 ('picture', models.URLField()),
@@ -32,12 +33,14 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='itemrequest',
             name='region',
-            field=models.CharField(choices=[('Tel Aviv', 'Tel Aviv'), ('Jerusalem', 'Jerusalem'), ('Beer Sheva', 'Beer Sheva'), ('Haifa', 'Haifa'), ('Modiin', 'Modiin'), ('Hasharon', 'Hasharon')], default='Tel Aviv', max_length=40),
+            field=models.CharField(choices=[('Tel Aviv', 'Tel Aviv'), ('Jerusalem', 'Jerusalem'), ('Beer Sheva', 'Beer Sheva'), (
+                'Haifa', 'Haifa'), ('Modiin', 'Modiin'), ('Hasharon', 'Hasharon')], default='Tel Aviv', max_length=40),
         ),
         migrations.AddField(
             model_name='itemrequest',
             name='status',
-            field=models.CharField(choices=[('open', 'open'), ('closed', 'closed')], default='open', max_length=40),
+            field=models.CharField(
+                choices=[('open', 'open'), ('closed', 'closed')], default='open', max_length=40),
         ),
         migrations.AlterField(
             model_name='itemrequest',
@@ -47,6 +50,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='itemrequest',
             name='item',
-            field=models.CharField(choices=[('ארון', 'closet'), ('מיטה', 'bed'), ('כיסא', 'chair'), ('מקרר', 'fridge'), ('מכונת כביסה', 'Washing machine'), ('ספה', 'sofa')], default='ארון', max_length=40),
+            field=models.CharField(choices=[('ארון', 'closet'), ('מיטה', 'bed'), ('כיסא', 'chair'), (
+                'מקרר', 'fridge'), ('מכונת כביסה', 'Washing machine'), ('ספה', 'sofa')], default='ארון', max_length=40),
         ),
     ]

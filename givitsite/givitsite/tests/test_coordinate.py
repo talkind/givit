@@ -1,6 +1,5 @@
-from django.test import TestCase, Client
 from django.shortcuts import reverse
-from django.conf import settings
+from django.test import TestCase
 
 URL_LIST = ['/coordinate/']
 URL_NAME_LIST = ['coordinator_create_view']

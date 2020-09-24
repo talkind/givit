@@ -13,6 +13,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='itemrequest',
             name='status',
-            field=models.CharField(choices=[('open', 'open'), ('closed', 'closed'), ('in_process', 'in process')], default='open', max_length=40),
+            field=models.CharField(choices=[('open', 'open'), ('closed', 'closed'), (
+                'in_process', 'in process')], default='open', max_length=40),
         ),
     ]
