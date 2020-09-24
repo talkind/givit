@@ -18,6 +18,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='itemrequest',
             name='item',
-            field=models.CharField(choices=[('20009', 'closet'), ('20016', 'bed'), ('20008', 'chair'), ('10006', 'fridge'), ('10029', 'Washing machine'), ('20017', 'sofa')], default='20009', max_length=40),
+            field=models.CharField(choices=[('20009', 'closet'), ('20016', 'bed'), ('20008', 'chair'), (
+                '10006', 'fridge'), ('10029', 'Washing machine'), ('20017', 'sofa')], default='20009', max_length=40),
         ),
     ]

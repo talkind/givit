@@ -1,15 +1,14 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-import urllib.request
-import urllib
-from bs4 import BeautifulSoup
-import re
-import csv
-from datetime import datetime
-from friendreq.models import ItemRequest
-from friendreq.models import ITEM_CHOICES
-from friendreq.models import ItemsFound
 import logging
+import re
+import urllib
+import urllib.request
+from datetime import datetime
+
+from bs4 import BeautifulSoup
+
+from friendreq.models import ITEM_CHOICES, ItemRequest, ItemsFound
 
 logger = logging.getLogger('django')
 iseek_dict = {'20016': 'מיטה', '20008': 'כיסא', '20009': 'ארון',
@@ -125,7 +124,12 @@ def find_new_furniture(soup, area, name):
         hour = datetime.now().hour
         my_regex = str(hour+1)+':[0-9][0-9]'
         item_state = str(re.match('.*(condition[2,1]).*', check_item_state))
-        if area in (c1[0].text) and str(re.match(my_regex, upload_time)) != 'None' and str(re.match(name, item_name)) != 'None' and item_state != 'None':
+        if (
+            area in (c1[0].text)
+            and str(re.match(my_regex, upload_time)) != 'None'
+            and str(re.match(name, item_name)) != 'None'
+            and item_state != 'None'
+        ):
             c3 = c2[0].find_all('a')
             string1 = str(c3[0])
             string2 = str(re.findall(r'href="(\S*)"', string1))

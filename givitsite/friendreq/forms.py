@@ -1,6 +1,7 @@
 from django import forms
 
-from . models import ItemRequest
+from .models import ItemRequest
+
 
 class itemRequestForm(forms.ModelForm):
     class Meta:

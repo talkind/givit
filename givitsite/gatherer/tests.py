@@ -1,10 +1,10 @@
-from django.test import TestCase
 import urllib.request
-from gatherer import agora
-from friendreq.models import ITEM_CHOICES
-from django.contrib.auth.models import User
-from friendreq.models import ItemRequest, ItemsFound
+
 import pytest
+
+from django.contrib.auth.models import User
+from friendreq.models import ITEM_CHOICES, ItemRequest, ItemsFound
+from gatherer import agora
 
 
 @pytest.fixture(scope='module')
@@ -32,7 +32,13 @@ def test_Agora_Getrequest(soup_list):
         assert str(type(soup)) == "<class 'bs4.BeautifulSoup'>"
 
 
-@ pytest.mark.parametrize("index, area, name", [(0, "Tel Aviv", "20009"), (1, "Tel Aviv", "20016"), (2, "Tel Aviv", "20008"), (3, "Tel Aviv", "10006"), (4, "Tel Aviv", "10029"), (5, "Tel Aviv", "20017")])
+@ pytest.mark.parametrize("index, area, name",
+                          [(0, "Tel Aviv", "20009"),
+                           (1, "Tel Aviv", "20016"),
+                              (2, "Tel Aviv", "20008"),
+                              (3, "Tel Aviv", "10006"),
+                              (4, "Tel Aviv", "10029"),
+                              (5, "Tel Aviv", "20017")])
 def test_find_furniture(soup_list, index, area, name):
     """
     this function test find_furniture func by check if the url which return is success status response code.
