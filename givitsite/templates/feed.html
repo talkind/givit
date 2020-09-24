@@ -1,7 +1,9 @@
 {%extends 'base.html'%}
 
 {%block content%}
-<h1>{{request.user.first_name}}'s Feed</h1>
+<div class="mx-auto" style="width: 200px;">
+    <h1>{{request.user.first_name}}'s Feed</h1>
+</div>
 {% for req in allRequests%}
 {% if req.friend_id == request.user%}
 <div class= "jumbotron jumbotron-fluid">
