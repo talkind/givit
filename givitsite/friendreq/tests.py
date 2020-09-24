@@ -1,14 +1,15 @@
-from django.test import TestCase, RequestFactory
+from django.test import TestCase, Client
 from django.shortcuts import reverse
 from django.contrib.auth.models import User
-from .models import ItemRequest,ItemsFound
+from .models import ItemRequest , ItemsFound
 from django.conf import settings
+import json
 
 URL_LIST = ['/friend/request', '/friend/feed']
 URL_NAME_LIST = ['requestItem', 'itemRequest_create_view']
 
 
-class FriendPageTests(TestCase):
+class FriendPageTests_views_GET(TestCase):
 
     # check the status code when navigate to the given url
     def test_request_status_code(self):
@@ -30,7 +31,6 @@ class FriendPageTests(TestCase):
 
 
 class ItemRequest_test(TestCase):
-
     def setUp(self):
         testEmail = 'testUser@Test.com'
         testPassword = 'top_secret_test'
