@@ -3,10 +3,10 @@
 # Installing packages
 sudo apt update
 sudo apt install -y python3.7 python3.7-dev python3-pip postgresql postgresql-contrib libpq-dev postgresql-common postgresql-client #postgresql-devel
-sudo pip3 install --upgrade pip
+pip3 install --upgrade pip
 
 # Installing pipenv, create new env and sync lib with pipfile
-sudo pip3 install pipenv
+pip3 install pipenv
 
 #navigate to app folder
 if [ "$CI" ] 
