@@ -1,11 +1,16 @@
 {%extends 'base.html'%}
 
 {%block content%}
-<h2>Add a new request</h2>
+<div class="mx-auto" style="width: 200px;">
+    <h2>Add a new request</h2>
+</div>
+
 <form method = 'POST'>     {%csrf_token%}
-    <div class="form-group"> 
-    {{form.as_p }}
-    </div>
-    <input type="submit" class="btn btn-primary" value ="send"/>
+    <div class="mx-auto" style="width: 200px;">
+        <div class="form-group"> 
+            {{form.as_p }}
+            </div>
+            <input type="submit" class="btn btn-primary" value ="send"/>
+    </div> 
 </form>
 {%endblock%}
