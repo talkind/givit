@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.shortcuts import reverse
-from django.test import TestCase
+from django.test import TestCase, Client
 from friendreq.models import ItemRequest
 
 URL_LIST = ['/friend/request', '/friend/feed']
@@ -8,6 +8,10 @@ URL_NAME_LIST = ['requestItem', 'itemRequest_create_view']
 
 
 class FriendPageTests_views_GET(TestCase):
+
+    def setUp(self):
+        # Every test needs a client.
+        self.client = Client()
 
     # check the status code when navigate to the given url
     def test_request_status_code(self):
