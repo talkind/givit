@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.shortcuts import reverse
-from django.test import TestCase, Client
+from django.test import Client, TestCase
 from friendreq.models import ItemRequest
 
 URL_LIST = ['/friend/request', '/friend/feed']
@@ -17,18 +17,18 @@ class FriendPageTests_views_GET(TestCase):
     def test_request_status_code(self):
         for url in URL_LIST:
             response = self.client.get(url)
-            self.assertEquals(response.status_code, 200)
+            self.assertEqual(response.status_code, 200)
 
     # check url name
     def test_request_url_name(self):
         for url_name in URL_NAME_LIST:
             response = self.client.get(reverse(url_name))
-            self.assertEquals(response.status_code, 200)
+            self.assertEqual(response.status_code, 200)
 
     # check if the correct template is being rendered
     def test_feed_correct_tamplate(self):
         response = self.client.get(reverse('requestItem'))
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'feed.html')
 
 
@@ -45,4 +45,4 @@ class ItemRequest_test(TestCase):
         # check insersion of request to the ItemRequest table
         req = ItemRequest.objects.get(friend_id=self.test_user)
         temp_special_request = req.special_req
-        self.assertEquals(temp_special_request, "this is a Test")
+        self.assertEqual(temp_special_request, "this is a Test")
