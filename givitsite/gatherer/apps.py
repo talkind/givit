@@ -5,7 +5,8 @@ from django.db.models.signals import post_migrate
 def my_callback(sender, **kwargs):
     from gatherer.tasks import gatherer_task
     from background_task.models import Task
-    gatherer_task(repeat=Task.HOURLY, repeat_until=None)
+    gatherer_task(repeat=Task.HOURLY, repeat_until=None,
+                  verbose_name="Gatherer")
     pass
 
 
