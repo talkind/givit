@@ -2,6 +2,27 @@
 
 {%block content%}
 
+     <div id="stripe" style="width:50%;">
+        <form method="GET">
+            <button type='submit' id="newColors" style="align-self:left">implement filters</button>
+            <span class="answer"></span>
+            <lable> Item type:  </lable>
+            <select id="itemButton" name="item" size="1" value="All" style="text-align-last:center; border:1ppx solid black;; display: inline-block; margin-left: 20ppx;">
+                <option value="" selected>All</option>
+                {% for item in item_choices %} 
+                    <option value="{{item}}">{{item}}</option>
+                {%endfor%}
+            </select>
+            <lable> city pick up:  </lable>
+            <select id="cityPickUpButton" name="city_pickup" size="1" style="text-align-last:center; border:1ppx solid black;; margin-left: 20ppx;">
+                <option value="" selected>All</option>
+                {% for city in region_choices %} 
+                    <option value="{{city}}">{{city}}</option>
+                {%endfor%}
+            </select>
+        </form>
+    </div>
+
 {% for item in matchedItems %}
     {% for request in openRequests %} 
        {% if item.request_id == request %} 
