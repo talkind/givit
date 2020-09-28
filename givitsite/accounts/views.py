@@ -57,6 +57,6 @@ def logout(request):
 def get_user_profile_data(user):
     try:
         user_profile = Profile.objects.get(user=user)
-    except Profile.DoesNotExist:
+    except:
         user_profile = None
     return user_profile
